@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}
+FitBuddy — Admin Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if admin_error %}
+
+<div class="alert error">
+    {{ admin_error }}
+</div>
+
+{% endif %}
+
+
+<section class="result-header">
+
+    <div>
+
+        <p class="eyebrow">
+            ADMIN DASHBOARD
+        </p>
+
+        <h1>
+            Users & plans
+        </h1>
+
+        <p>
+            {{ users|length }}
+            stored profile(s)
+        </p>
+
+    </div>
+
+
+    <a
+        class="secondary"
+        href="/"
+    >
+        Home
+    </a>
+
+</section>
+
+
+<div class="admin-list">
+
+
+{% for user in users %}
+
+
+<article class="card admin-card">
+
+
+    <div class="admin-meta">
+
+
+        <div>
+
+            <h2>
+                {{ user.name }}
+            </h2>
+
+            <p>
+
+                <strong>
+                    ID:
+                </strong>
+
+                {{ user.user_id }}
+
+                ·
+
+                <strong>
+                    Age:
+                </strong>
+
+                {{ user.age }}
+
+                ·
+
+                <strong>
+                    Weight:
+                </strong>
+
+                {{ user.weight_kg }}
+                kg
+
+            </p>
+
+        </div>
+
+
+        <span class="pill">
+
+            {{ user.goal|title }}
+
+            /
+
+            {{ user.intensity|title }}
+
+        </span>
+
+
+    </div>
+
+
+    {% if user.plan %}
+
+
+    <details>
+
+        <summary>
+            View original plan
+        </summary>
+
+        <pre>
+{{ user.plan.original_plan }}
+        </pre>
+
+    </details>
+
+
+    {% if user.plan.updated_plan %}
+
+    <details open>
+
+        <summary>
+            View updated plan
+        </summary>
+
+        <pre>
+{{ user.plan.updated_plan }}
+        </pre>
+
+    </details>
+
+    {% endif %}
+
+
+    {% if user.plan.latest_feedback %}
+
+    <div class="feedback">
+
+        <strong>
+            Latest feedback:
+        </strong>
+
+        {{ user.plan.latest_feedback }}
+
+    </div>
+
+    {% endif %}
+
+
+    {% endif %}
+
+
+</article>
+
+
+{% else %}
+
+
+<div class="card">
+
+    <p>
+        No users yet.
+    </p>
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="FitBuddy AI personalized fitness planner"
+    >
+
+    <title>
+        {% block title %}
+        FitBuddy
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='styles.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <a
+        class="brand"
+        href="/"
+    >
+        Fit<span>Buddy</span>
+    </a>
+
+    <a
+        class="nav-link"
+        href="/docs"
+    >
+        API Docs
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<footer>
+
+    FitBuddy provides general wellness guidance,
+    not medical advice.
+
+</footer>
+
+</body>
+
+</html>

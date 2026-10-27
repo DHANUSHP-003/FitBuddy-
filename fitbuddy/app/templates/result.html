@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}
+FitBuddy — Your Plan
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if error %}
+
+<div class="alert error">
+    {{ error }}
+</div>
+
+{% endif %}
+
+
+{% if user %}
+
+<section class="result-header">
+
+    <div>
+
+        <p class="eyebrow">
+
+            {% if is_updated %}
+                UPDATED PLAN
+            {% else %}
+                YOUR PERSONAL PLAN
+            {% endif %}
+
+        </p>
+
+
+        <h1>
+            {{ user.name }}'s FitBuddy plan
+        </h1>
+
+
+        <p>
+
+            {{ user.goal|title }}
+
+            ·
+
+            {{ user.intensity|title }}
+            intensity
+
+            ·
+
+            {{ user.weight_kg }}
+            kg
+
+            · age
+            {{ user.age }}
+
+        </p>
+
+    </div>
+
+
+    <a
+        class="secondary"
+        href="/"
+    >
+        Create another plan
+    </a>
+
+</section>
+
+
+<div class="result-grid">
+
+
+    <section class="card plan-card">
+
+        <div class="section-heading">
+
+            <h2>
+                7-Day Workout
+            </h2>
+
+            <span class="pill">
+                Gemini
+            </span>
+
+        </div>
+
+
+        <pre>{{ plan }}</pre>
+
+    </section>
+
+
+    <aside class="side-stack">
+
+
+        <section class="card tip-card">
+
+            <p class="eyebrow">
+                NUTRITION / RECOVERY
+            </p>
+
+            <h2>
+                One useful habit
+            </h2>
+
+            <p>
+                {{ nutrition_tip }}
+            </p>
+
+        </section>
+
+
+        <section class="card feedback-card">
+
+            <p class="eyebrow">
+                REFINE YOUR PLAN
+            </p>
+
+            <h2>
+                What should change?
+            </h2>
+
+            <p>
+                Examples:
+                “more cardio”,
+                “less impact”,
+                “add another recovery day”.
+            </p>
+
+
+            <form
+                action="/submit-feedback"
+                method="post"
+            >
+
+                <input
+                    type="hidden"
+                    name="user_id"
+                    value="{{ user.user_id }}"
+                >
+
+
+                <textarea
+                    name="feedback"
+                    maxlength="2000"
+                    minlength="3"
+                    required
+                    placeholder="Tell FitBuddy what you want to change..."
+                ></textarea>
+
+
+                <button type="submit">
+                    Update Plan →
+                </button>
+
+            </form>
+
+        </section>
+
+    </aside>
+
+</div>
+
+
+{% else %}
+
+
+<div class="card">
+
+    <h1>
+        Plan unavailable
+    </h1>
+
+    <p>
+        Return home and generate a new plan.
+    </p>
+
+    <a
+        class="secondary"
+        href="/"
+    >
+        Go home
+    </a>
+
+</div>
+
+
+{% endif %}
+
+{% endblock %}
